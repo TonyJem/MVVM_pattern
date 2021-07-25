@@ -1,20 +1,26 @@
 import Foundation
 
 protocol MvvmViewModelProtocol: class {
-    var updateView: ((MvvmView)->())? { get set }
+    var updateView: ((MvvmModel)->())? { get set }
     
     func showFirstImage()
     func showSecondIamge()
 }
 
 class MvvmViewModel: MvvmViewModelProtocol {
-    var updateView: ((MvvmView) -> ())?
+    var updateView: ((MvvmModel) -> ())?
     
     func showFirstImage() {
-        
+        updateView?(.loading(MvvmModel.Model(image: "Loading", isHiden: false)))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.updateView?(.success(MvvmModel.Model(image: "Success", isHiden: true)))
+        }
     }
     
     func showSecondIamge() {
-        
+        updateView?(.loading(MvvmModel.Model(image: "Loading", isHiden: false)))
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.updateView?(.failure(MvvmModel.Model(image: "Failure", isHiden: true)))
+        }
     }
 }
