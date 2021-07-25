@@ -4,7 +4,7 @@ protocol MvvmViewModelProtocol: class {
     var updateView: ((MvvmModel)->())? { get set }
     
     func showFirstImage()
-    func showSecondIamge()
+    func showSecondImage()
 }
 
 class MvvmViewModel: MvvmViewModelProtocol {
@@ -17,7 +17,7 @@ class MvvmViewModel: MvvmViewModelProtocol {
         }
     }
     
-    func showSecondIamge() {
+    func showSecondImage() {
         updateView?(.loading(MvvmModel.Model(image: "Loading", isHiden: false)))
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.updateView?(.failure(MvvmModel.Model(image: "Failure", isHiden: true)))
