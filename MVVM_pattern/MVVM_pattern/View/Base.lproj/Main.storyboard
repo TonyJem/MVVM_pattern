@@ -53,6 +53,9 @@
                                                 <state key="normal" title="Show First Image">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="showFirstImageBtnPressed:" destination="THW-Bq-tsg" eventType="touchUpInside" id="ece-Pp-xCR"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NmG-SO-KbL">
                                                 <rect key="frame" x="187" y="0.0" width="167" height="40"/>
@@ -63,6 +66,9 @@
                                                 <state key="normal" title="Show Second Image">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="showSecondImageBtnPressed:" destination="THW-Bq-tsg" eventType="touchUpInside" id="JnU-h8-Vjz"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -81,6 +87,12 @@
                             <constraint firstItem="UNc-T1-GmH" firstAttribute="leading" secondItem="JpZ-hl-WMZ" secondAttribute="leading" constant="30" id="rFZ-vQ-vQr"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityIndicator" destination="JqS-gW-vNv" id="jtb-4U-5pd"/>
+                        <outlet property="imageView" destination="WWS-jG-SyG" id="mow-SN-M3S"/>
+                        <outlet property="showFirstImageBtn" destination="Cib-Ow-ePS" id="fOI-bc-wVo"/>
+                        <outlet property="showSecondImageBtn" destination="NmG-SO-KbL" id="UVw-Jj-QcX"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Lv-mv-3Ot" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
