@@ -12,15 +12,42 @@ class MvvmView: UIViewController {
         super.viewDidLoad()
         
         viewModel = MvvmViewModel()
+        getState()
     }
     
     @IBAction func showFirstImageBtnPressed(_ sender: UIButton) {
-        print("🟢 showFirstImageBtnPressed")
         viewModel.showFirstImage()
     }
     
     @IBAction func showSecondImageBtnPressed(_ sender: UIButton) {
-        print("🟢 showSecondImageBtnPressed")
         viewModel.showSecondImage()
     }
+    
+    private func update(state: MvvmModel.Model?) {
+        guard let state = state else { return }
+        imageView.image = UIImage(named: state.image)
+        activityIndicator.isHidden = state.isHiden
+    }
+    
+    private func getState() {
+        activityIndicator.isHidden = true
+        
+        viewModel.updateView = { [weak self] data in
+            guard let self = self else { return }
+            switch data {
+            case .initial:
+                self.update(state: nil)
+            case .loading(let loading):
+                self.update(state: loading)
+                self.activityIndicator.startAnimating()
+            case .success(let success):
+                self.update(state: success)
+                self.activityIndicator.stopAnimating()
+            case .failure(let failure):
+                self.update(state: failure)
+                self.activityIndicator.stopAnimating()
+            }
+        }
+    }
 }
+
