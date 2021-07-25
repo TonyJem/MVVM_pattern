@@ -13,6 +13,7 @@ class MvvmView: UIViewController {
         
         viewModel = MvvmViewModel()
         getState()
+        viewModel.showDefaultImage()
     }
     
     @IBAction func showFirstImageBtnPressed(_ sender: UIButton) {
@@ -35,14 +36,18 @@ class MvvmView: UIViewController {
         viewModel.updateView = { [weak self] data in
             guard let self = self else { return }
             switch data {
-            case .initial:
-                self.update(state: nil)
+            case .initial(let initial):
+                self.update(state: initial)
+                self.activityIndicator.stopAnimating()
+                
             case .loading(let loading):
                 self.update(state: loading)
                 self.activityIndicator.startAnimating()
+                
             case .success(let success):
                 self.update(state: success)
                 self.activityIndicator.stopAnimating()
+                
             case .failure(let failure):
                 self.update(state: failure)
                 self.activityIndicator.stopAnimating()

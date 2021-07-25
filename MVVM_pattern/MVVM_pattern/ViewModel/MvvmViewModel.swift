@@ -5,6 +5,7 @@ protocol MvvmViewModelProtocol: class {
     
     func showFirstImage()
     func showSecondImage()
+    func showDefaultImage()
 }
 
 class MvvmViewModel: MvvmViewModelProtocol {
@@ -22,5 +23,9 @@ class MvvmViewModel: MvvmViewModelProtocol {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             self.updateView?(.failure(MvvmModel.Model(image: "Failure", isHiden: true)))
         }
+    }
+    
+    func showDefaultImage() {
+        updateView?(.initial(MvvmModel.Model(image: "Default", isHiden: true)))
     }
 }

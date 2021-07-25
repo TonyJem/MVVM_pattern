@@ -1,7 +1,7 @@
 import Foundation
 
 enum MvvmModel {
-    case initial
+    case initial(Model)
     case loading(Model)
     case success(Model)
     case failure(Model)
